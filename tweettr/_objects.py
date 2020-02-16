@@ -48,6 +48,10 @@ class User(TweettrBase):
     """User
     
     see: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/user-object
+
+    Attributes
+    ----------
+    {attributes}
     """
     id: int
     id_str: str
@@ -106,6 +110,10 @@ class Coordinates(TweettrBase):
     """Coordinates
     
     see: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/geo-objects#coordinates
+
+    Attributes
+    ----------
+    {attributes}
     """
     coordinates: List[float]
     type: Literal['Point']
@@ -119,6 +127,10 @@ class BoundingBox(TweettrBase):
     """BoundingBox
     
     see: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/geo-objects#obj-boundingbox
+
+    Attributes
+    ----------
+    {attributes}
     """
     coordinates: List[List[List[float]]]
     type: Literal['Polygon']
@@ -133,6 +145,9 @@ class Place(TweettrBase):
 
     see: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/geo-objects#place-dictionary
 
+    Attributes
+    ----------
+    {attributes}
     """
     id: str
     country: Optional[str]
@@ -153,6 +168,10 @@ class HashTag(TweettrBase):
     """HashTag
     
     see: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/entities-object#hashtags
+
+    Attributes
+    ----------
+    {attributes}
     """
     text: str
     indices: List[int]
@@ -166,6 +185,10 @@ class Emoji(TweettrBase):
 
     this is a custom Tweettr object that acts like a HashTag object but contains info about
     emojis in the tweet text
+
+    Attributes
+    ----------
+    {attributes}
     """
     text: str
     indices: List[int]
@@ -178,6 +201,10 @@ class Size(TweettrBase):
     """Size
     
     see: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/entities-object#size
+
+    Attributes
+    ----------
+    {attributes}
     """
     w: int
     h: int
@@ -193,6 +220,10 @@ class Sizes(TweettrBase):
     simple container for multiple Size objects
 
     see: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/entities-object#size
+
+    Attributes
+    ----------
+    {attributes}
     """
     large: Size
     medium: Size
@@ -207,6 +238,10 @@ class Symbol(TweettrBase):
     """Symbol
     
     see: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/entities-object#symbols
+
+    Attributes
+    ----------
+    {attributes}
     """
     text: str
     indices: List[int]
@@ -219,6 +254,10 @@ class Url(TweettrBase):
     """Url
 
     see: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/entities-object#urls
+
+    Attributes
+    ----------
+    {attributes}
     """
     display_url: str
     expanded_url: str
@@ -233,6 +272,10 @@ class Media(TweettrBase):
     """Media
     
     see: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/entities-object#media
+
+    Attributes
+    ----------
+    {attributes}
     """
     display_url: str
     expanded_url: str
@@ -263,6 +306,10 @@ class UserMention(TweettrBase):
     """UserMention
     
     see: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/entities-object#mentions
+
+    Attributes
+    ----------
+    {attributes}
     """
     id: int
     id_str: str
@@ -278,6 +325,10 @@ class Poll(TweettrBase):
     """Poll
 
     see: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/entities-object#polls
+
+    Attributes
+    ----------
+    {attributes}
     """
     options: List[Dict]  # TODO: should be List[Option]
     end_datetime: str
@@ -292,6 +343,10 @@ class Entities(TweettrBase):
     """Entities
     
     see: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/entities-object
+
+    Attributes
+    ----------
+    {attributes}
     """
     hashtags: List[HashTag]
     urls: List[Url]
@@ -308,6 +363,10 @@ class ExtendedEntities(TweettrBase):
     """ExtendedEntities
     
     see: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/extended-entities-object
+
+    Attributes
+    ----------
+    {attributes}
     """
     media: List[Media]
 
@@ -321,6 +380,10 @@ class ExtendedTweet(TweettrBase):
     this depends on api-access and streaming or not endpoints and if extended_mode is requested
     
     see: https://developer.twitter.com/en/docs/tweets/tweet-updates
+
+    Attributes
+    ----------
+    {attributes}
     """
     full_text: str
     truncated: Literal[False]
@@ -336,6 +399,10 @@ class QuotedStatusPermalink(TweettrBase):
     """QuotedStatusPermalink
     
     see: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/intro-to-tweet-json
+
+    Attributes
+    ----------
+    {attributes}
     """
     display: str
     expanded: str
@@ -349,6 +416,10 @@ class Tweet(TweettrBase):
     """Tweet
 
     see: https://developer.twitter.com/en/docs/tweets/data-dictionary/overview/tweet-object
+
+    Attributes
+    ----------
+    {attributes}
     """
     created_at: str
     id: int

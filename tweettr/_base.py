@@ -2,7 +2,10 @@
 __author__ = "Andreas Poehlmann"
 __email__ = "andreas@poehlmann.io"
 
-from typing import Any, Dict, Union, get_args, get_origin, get_type_hints
+import re
+from typing import Any, Dict, Literal, Union, get_args, get_origin, get_type_hints
+# noinspection PyUnresolvedReferences
+from typing import ForwardRef
 
 __all__ = ['TweettrBase', 'enhance_type_hinted_classes_with_descriptors']
 
@@ -41,11 +44,56 @@ class TweettrDescriptor:
         return self._type_cls(values)
 
 
+def _typing_to_np_doc(type_, level=0):
+    """convert a type decoration used in Tweettr to np doc style type"""
+    optional = False
+    origin = get_origin(type_)
+    t_args = get_args(type_)
+
+    if origin is Union and type(None) in t_args:
+        if level == 0:
+            optional = True
+        output = _typing_to_np_doc(t_args[0], level=level+1)
+    elif origin is list:
+        output = f'List[{_typing_to_np_doc(t_args[0], level=level+1)!s}]'
+    elif origin is dict:
+        output = f'Dict[{t_args[0]!s},{t_args[1]!s}]'
+    elif origin is Literal:
+        output = type(t_args[0]).__name__
+    elif isinstance(type_, ForwardRef):
+        output = type_.__forward_arg__
+    elif type_ is Any:
+        output = 'Any'
+    else:
+        output = type_.__name__
+
+    if level == 0:
+        return f'`{output!s}`{", optional" if optional else ""}'
+    return output
+
+
 class TweettrMeta(type):
-    """use slots in all subclasses of TweettrBase"""
+    """meta class for TweettrBase"""
     def __new__(mcs, name, bases, attrs):
         # set slots if not defined.
         attrs.setdefault('__slots__', ())
+
+        # add annotations in alphabetical order to docstring
+        doc_str = attrs.get('__doc__', None)
+        if doc_str:
+            m = re.search(r"^(?P<indent>\s*)[{]attributes[}]\s*", doc_str, re.MULTILINE)
+            if m:
+                attribute_items = sorted(attrs.get('__annotations__', {}).items())
+                doc_attrs = []
+                for attr_name, attr_type in attribute_items:
+                    type_str = _typing_to_np_doc(attr_type)
+                    doc_attr = f'{attr_name}: {type_str}'
+                    doc_attrs.append(doc_attr)
+                indent = m.group('indent')
+                rendered_attributes = f'\n{indent}'.join(doc_attrs)
+                doc_str = doc_str.format(attributes=rendered_attributes)
+                attrs['__doc__'] = doc_str
+
         return super().__new__(mcs, name, bases, attrs)
 
 
