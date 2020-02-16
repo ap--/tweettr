@@ -3,7 +3,7 @@
 [![PyPI](https://img.shields.io/pypi/v/tweettr)](https://pypi.org/project/tweettr/)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/tweettr?label=pypi)](https://pypi.org/project/tweettr/)
 [![MIT license](http://img.shields.io/badge/license-MIT-yellowgreen.svg)](http://opensource.org/licenses/MIT)
-[![GitHub issues](https://img.shields.io/github/issues/ap--/python-tweettr.svg)](https://github.com/ap--/tweettr/issues)
+[![GitHub issues](https://img.shields.io/github/issues/ap--/tweettr.svg)](https://github.com/ap--/tweettr/issues)
 [![Github Sponsors](https://img.shields.io/badge/github-sponsors-blue)](https://github.com/sponsors/ap--)
 
 Tweettr gives you a convenient attribute interface to (some) tweet objects without any copying overhead.
