@@ -1,4 +1,7 @@
 """emoji parsing for tweet texts"""
+__author__ = "Andreas Poehlmann"
+__email__ = "andreas@poehlmann.io"
+
 import re
 
 # This regex pattern matches a single emoji
